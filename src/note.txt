@@ -1,0 +1,12 @@
+GSM kontroller
+publiczne
+-send SMS
+-isOKstatus
+-providePIN
+-getlastmessage
+buffer ?
+isPinLocked
+isSimInside
+module power on = flase/true
+string last message received
+int messages in module
