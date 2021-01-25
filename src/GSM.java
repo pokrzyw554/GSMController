@@ -10,16 +10,19 @@ public class GSM {
     boolean isPowerOn;
     String lastMessage;
     int messegesInModule;
+    Executor executor;  //co potrzebuje executor żeby sie stworzyć?
     SerialPort port; //potrzebne? tak! do konstrukcji innych modułów
     GsmReader reader;
     GsmWriter writer;
     Stack stos;
 
     //todo konstruktor  //done
+    //why don't use GSM_Fabric?
     GSM(SerialPort port)
     {
         this.port = port;
         this.stos = new Stack();
+        this.executor = new Executor(this.stos);
         this.reader = new GsmReader(this.port, this.stos);
         this.writer = new GsmWriter(this.port);
         init();
