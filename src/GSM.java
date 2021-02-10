@@ -32,7 +32,9 @@ public class GSM {
         port.setBaudRate(115200);
         port.openPort();
         Thread odczyt = new Thread(reader);
+        Thread agent = new Thread(executor);
         odczyt.start();
+        agent.start();
         //reader.start();
         try {
             Thread.sleep(20);

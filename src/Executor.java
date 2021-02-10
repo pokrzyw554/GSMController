@@ -22,12 +22,21 @@ public class Executor extends Thread{
                 try
                 {
                     if(stos_reference.isStackEmpty()) {
-                        Thread.sleep(1000);
-                    }
-                    odczytane = stos_reference.take();
-                    switch (odczytane)
-                    {
-
+                        Thread.sleep(5000);
+                        System.out.println("idle");
+                    }else {
+                        odczytane = stos_reference.take();
+                        switch (odczytane) {
+                            case "Blue":
+                                System.out.println("a teraz niebieska");
+                                break;
+                            case "Green":
+                                System.out.println("odczytano zielona");
+                                break;
+                            default:
+                                System.out.println("takie coś odczytałem " + odczytane);
+                                break;
+                        }
                     }
                 }catch (Exception e)
                 {

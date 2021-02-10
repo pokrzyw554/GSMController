@@ -15,7 +15,7 @@ public class Stack {
         {
             return null;
         }else {
-            String tmp = stosik[top];
+            String tmp = stosik[top-1];
             top--;
             return tmp;
         }
