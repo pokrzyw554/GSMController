@@ -30,7 +30,7 @@ public class GsmReader extends Thread {
                     //char[] output = bytesToChar(rawBuffer);
                     String s = rawBuffToString(rawBuffer);
                     System.out.println(String.valueOf(s));
-                    stos.add(s);  //bedzie dodawać coś za każdym odczytem, potem sie tym zajmie executor
+                    stos.add(sanitizeInput(s));  //bedzie dodawać coś za każdym odczytem, potem sie tym zajmie executor
                 }
             }catch (Exception e)
             {
@@ -61,7 +61,11 @@ public class GsmReader extends Thread {
         {
             wynik[i] = (char)readBuffer[i];
         }
-        String s = String.valueOf(wynik);
-        return s;
+        return String.valueOf(wynik);
+    }
+    private String sanitizeInput(String input)
+    {
+        return input.substring(0, input.length() - 2);
+
     }
 }
