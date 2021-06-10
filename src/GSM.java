@@ -1,4 +1,7 @@
 import com.fazecast.jSerialComm.SerialPort;
+
+import java.util.regex.Pattern;
+
 /*
 do tej klasy ma miec dostep kontroler Springa
 klasa powinna być ściśle powiązana z GSM controller, GSM Reader
@@ -10,6 +13,7 @@ public class GSM {
     boolean isPowerOn;
     String lastMessage;
     int messegesInModule;
+    Dispatcher dispatcher; //w sumie dispatcher powinien być wydelegowany do robienia rzeczy i ew. kierować to na executera
     Executor executor;  //co potrzebuje executor żeby sie stworzyć?
     SerialPort port; //potrzebne? tak! do konstrukcji innych modułów
     GsmReader reader;
@@ -56,6 +60,9 @@ public class GSM {
     public void providePin(int Pin)
     {
         //AT+CPIN 86str
+        //validate pin
+        Pattern validPIN = Pattern.compile("\\A\\d{4}\\Z"); //4digits. no more no less
+        writer.customWrite("AT+CPIN="+Pin+"\r\n");
     }
 
     public String getLastMessage() //docelowo ma być prywatna

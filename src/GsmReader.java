@@ -10,7 +10,7 @@ public class GsmReader extends Thread {
     //byte[] rawBuffer = new byte[32];  jednak inicjowanie w pętli jest dogodniejsze, bo odczytamy tyle ile jest dostępne
     SerialPort serial;
     char[] processedBuffer;
-    Stack stos;
+    Stack readerStack;
 
 
     @Override
@@ -30,7 +30,7 @@ public class GsmReader extends Thread {
                     //char[] output = bytesToChar(rawBuffer);
                     String s = rawBuffToString(rawBuffer);
                     System.out.println(String.valueOf(s));
-                    stos.add(sanitizeInput(s));  //bedzie dodawać coś za każdym odczytem, potem sie tym zajmie executor
+                    readerStack.add(s);  //bedzie dodawać coś za każdym odczytem, potem sie tym zajmie executor
                 }
             }catch (Exception e)
             {
@@ -42,7 +42,7 @@ public class GsmReader extends Thread {
 
     public GsmReader(SerialPort serial, Stack stos) {
         this.serial = serial;
-        this.stos = stos;
+        this.readerStack = stos;
     }
 
     private char[] bytesToChar(byte[] toProceed)    //jednak metoda poniżej robi tą robote i więcej
@@ -66,6 +66,7 @@ public class GsmReader extends Thread {
     private String sanitizeInput(String input)
     {
         return input.substring(0, input.length() - 2);
+        //-2 mialo obcinac \lf\cr ale jak wysyłasz po znaku to po chuju
 
     }
 }

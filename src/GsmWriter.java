@@ -2,6 +2,10 @@ import com.fazecast.jSerialComm.SerialPort;
 
 public class GsmWriter {
 
+    /*
+    writer też powinien mieć własny stack....
+    i wgl coś mi tu kurwa brakuje interfejsów
+     */
     SerialPort port;
     public GsmWriter(SerialPort port) {
         this.port = port;

@@ -1,4 +1,4 @@
-import jdk.nashorn.internal.runtime.regexp.joni.Regex;
+//import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +19,7 @@ public class Executor extends Thread{
     }
 
     Pattern incomingSMS = Pattern.compile("AT\\+CMGR=\\d{1,}"); //regex for checking if messege appear
-    //Matcher matcher = incomingSMS.matcher()
+
 
     public void run()
     {
@@ -49,6 +49,10 @@ public class Executor extends Thread{
                                 //end of debuging section
                                 case "RING":
                                     incommingCall();
+                                    break;
+                                case "+CPIN: SIM PIN":
+                                    //jakoś musisz powiedzieć GSMowi, że jest blokada pin
+                                    break;
                                 default:
                                     System.out.println("takie coś odczytałem " + odczytane);
                                     break;
@@ -68,6 +72,7 @@ public class Executor extends Thread{
 
     private void incommingCall() {
         //todo
+        //na razie odrzucamy na sile
     }
 
 }
